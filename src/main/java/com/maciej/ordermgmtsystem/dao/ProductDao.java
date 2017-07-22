@@ -9,5 +9,5 @@ public interface ProductDao {
 
     Collection<Product> getAll();
 
-    Product get(long id);
+    Product get(String isin);
 }

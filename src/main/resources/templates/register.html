@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Register</title>
+    <script src="/js/jquery-3.2.1.js"></script>
+</head>
+
+<body>
+<div><a href="/">Home</a> </div>
+
+<form id="form" method="post">
+    <div><label> User Name : <input id="username"/> </label></div>
+    <div><label> Password: <input id="password" name="password"/> </label></div>
+    <div><input id="submit" type="button" value="register"/></div>
+</form>
+</body>
+
+
+<script>
+    $(document).ready(function(){
+        // click on button submit
+        $("#submit").on('click', function(){
+            var data = {
+                "username": $('#username').val(),
+                "password": $('#password').val()
+            }
+            // send ajax
+            $.ajax({
+                url: '/rest/users',
+                type : "POST",
+                contentType: "application/json",
+                dataType: 'json',
+                data : JSON.stringify(data),
+                success : function(result) {
+                    console.log(result);
+                    window.location.href = "/";
+                },
+                error: function(xhr, resp, text) {
+                    console.log(xhr, resp, text);
+                }
+            })
+            return false;
+        });
+    });
+
+</script>
+</html>

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/rest/products")
 public class ProductController {
     private final ProductDao productDao;
 
@@ -23,9 +23,9 @@ public class ProductController {
         return productDao.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Product product(@PathVariable("id") long id) {
-        return productDao.get(id);
+    @GetMapping("/{isin}")
+    public Product product(@PathVariable("isin") String isin) {
+        return productDao.get(isin);
     }
 
 }

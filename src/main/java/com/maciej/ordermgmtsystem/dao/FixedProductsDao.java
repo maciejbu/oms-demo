@@ -8,15 +8,15 @@ import java.util.*;
 @Repository
 public class FixedProductsDao implements ProductDao {
 
-    private final Map<Long, Product> productsMap = new HashMap<>();
+    private final Map<String, Product> productsMap = new HashMap<>();
 
     public FixedProductsDao() {
-        add(new Product(1, "EPA:BNP", "BNP Paribas SA"));
-        add(new Product(2, "NYSE:UBS", "UBS Group AG (USA)"));
+        add(new Product( "FR0000131104", "BNP Paribas SA"));
+        add(new Product( "CH0244767585", "UBS Group AG (USA)"));
     }
 
     private void add(Product product) {
-        productsMap.put(product.getId(), product);
+        productsMap.put(product.getIsin(), product);
     }
 
     @Override
@@ -25,8 +25,8 @@ public class FixedProductsDao implements ProductDao {
     }
 
     @Override
-    public Product get(long id) {
-        return productsMap.get(id);
+    public Product get(String isin) {
+        return productsMap.get(isin);
     }
 
 

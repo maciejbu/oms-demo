@@ -1,26 +1,22 @@
 package com.maciej.ordermgmtsystem.domain;
 
 public class Product {
-    private final long id;
-    private final String name;
+    private final String isin;
     private final String description;
 
 
-    public Product(long id, String name, String description) {
-        this.id = id;
-        this.name = name;
+    // Production system like to use internal ID in addition to ISIN
+    public Product(String isin, String description) {
+        this.isin = isin;
         this.description = description;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
+    public String getIsin() {
+        return isin;
     }
 
     public String getDescription() {
         return description;
     }
 }
+
