@@ -12,6 +12,7 @@ public class FixedListProductManager implements ProductManager {
     private final Map<String, Product> productsMap = new HashMap<>();
 
     public FixedListProductManager() {
+        // Adding some products for demo purposes
         add(new Product( "FR0000131104", "BNP Paribas SA"));
         add(new Product( "CH0244767585", "UBS Group AG (USA)"));
     }

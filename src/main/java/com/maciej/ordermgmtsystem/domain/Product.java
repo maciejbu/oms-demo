@@ -4,8 +4,7 @@ public class Product {
     private final String isin;
     private final String description;
 
-
-    // Production system like to use internal ID in addition to ISIN
+    // Production system likely to use internal ID in addition to ISIN
     public Product(String isin, String description) {
         this.isin = isin;
         this.description = description;

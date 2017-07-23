@@ -17,28 +17,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                // HTML pages
                 .antMatchers("/", "/home", "/register", "/login").permitAll()
                 .antMatchers("/js/**").permitAll()
+                // user to freely access registration and login, hence permitting all
                 .antMatchers("/rest/users").permitAll()
                 .antMatchers("/rest/login").permitAll()
                 .anyRequest().authenticated();
-              //  .and().formLogin().loginPage("/login").permitAll();
 
-        //http.sessionManagement().sessionAuthenticationStrategy(strategy);
-
-
-        // CSRF prevents using REST with independent requests - disabling
-        http.csrf().ignoringAntMatchers("/**");
+        // CSRF prevents using REST with independent requests; this could be handled differently depending on requirements
+        // https://github.com/Zuehlke/springboot-sec-tutor/tree/rest-auth
+        http.csrf().ignoringAntMatchers("/rest/**");
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsManager());
-        //auth.authenticationProvider(provider);
     }
 
     @Bean
     public UserDetailsManager userDetailsManager() {
+        // Relying purely on in-memory manager for this demo
         return new InMemoryUserDetailsManager();
     }
 }

@@ -1,9 +1,9 @@
 package com.maciej.ordermgmtsystem.dto;
 
+// Using mutable DTO for use with Jackson library.
 public class UserDto {
     private String username;
     private String password;
-    private String company;
 
     public String getUsername() {
         return username;
@@ -19,13 +19,5 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
     }
 }

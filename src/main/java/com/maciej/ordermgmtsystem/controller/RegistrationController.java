@@ -31,7 +31,6 @@ public class RegistrationController {
 
         userManager.createUser(new User(user.getUsername(), user.getPassword(), AUTHORITIES));
 
-
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }
