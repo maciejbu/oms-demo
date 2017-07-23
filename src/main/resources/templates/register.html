@@ -8,6 +8,8 @@
 <body>
 <div><a href="/">Home</a> </div>
 
+<div id="info"/>
+
 <form id="form" method="post">
     <div><label> User Name : <input id="username"/> </label></div>
     <div><label> Password: <input id="password" name="password"/> </label></div>
@@ -23,7 +25,9 @@
                 "username": $('#username').val(),
                 "password": $('#password').val()
             }
-            // send ajax
+
+            $('#info').text(" ");
+
             $.ajax({
                 url: '/rest/users',
                 type : "POST",
@@ -32,9 +36,11 @@
                 data : JSON.stringify(data),
                 success : function(result) {
                     console.log(result);
+                    window.location.href = "/";
                 },
                 error: function(xhr, resp, text) {
                     console.log(xhr, resp, text);
+                    $('#info').text("Failed to register.");
                 }
             })
         });

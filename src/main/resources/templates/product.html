@@ -2,8 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Products</title>
+    <script src="/js/jquery-3.2.1.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: '/rest/products',
+                type : "GET",
+                contentType: "application/json",
+                dataType: 'json',
+                success : function(result) {
+                    console.log(result);
+                    $('#data').val(JSON.stringify(result, null,'\t'));
+
+                },
+                error: function(xhr, resp, text) {
+                    console.log(xhr, resp, text);
+                    alert("Error " + resp);
+                }
+            })
+        });
+    </script>
 </head>
 <body>
 <h1>Products</h1>
+<div>
+    <textarea id="data" rows="20" cols="100"/>
+</div>
 </body>
 </html>
