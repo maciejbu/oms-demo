@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 
 
 @Configuration
@@ -16,26 +17,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/home", "/register").permitAll()
+                .antMatchers("/", "/home", "/register", "/login").permitAll()
                 .antMatchers("/js/**").permitAll()
-                .antMatchers("/rest/register").permitAll()
-                .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").permitAll()
-                .and()
-                .logout()
-                .permitAll();
+                .antMatchers("/rest/users").permitAll()
+                .antMatchers("/rest/login").permitAll()
+                .anyRequest().authenticated();
+              //  .and().formLogin().loginPage("/login").permitAll();
+
+        //http.sessionManagement().sessionAuthenticationStrategy(strategy);
+
 
         // CSRF prevents using REST with independent requests - disabling
-        http.csrf().ignoringAntMatchers("/rest/**");
+        http.csrf().ignoringAntMatchers("/**");
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(inMemoryUserDetailsManager());
+        auth.userDetailsService(userDetailsManager());
+        //auth.authenticationProvider(provider);
     }
 
     @Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
+    public UserDetailsManager userDetailsManager() {
         return new InMemoryUserDetailsManager();
     }
 }
